@@ -109,4 +109,35 @@ function headlesswp_api_secret_callback() {
     echo '<input type="text" id="headlesswp_api_secret" name="headlesswp_api_secret" value="' . esc_attr($value) . '" class="regular-text">';
 }
 
+function invalidate_frontend_cache_on_save($post_id, $post, $update) {
+    // Skip if this is an auto-draft or revision
+    if (wp_is_post_revision($post_id) || get_post_status($post_id) === 'auto-draft') {
+        return;
+    }
+
+    // Your API endpoint and secret key
+    $api_url = get_option('headlesswp_api_url');
+    $secret_key = get_option('headlesswp_api_secret');
+
+    // Determine the post type
+    $post_type = get_post_type($post_id);
+
+    // Build the API URL
+    $url = add_query_arg([
+        'secret' => $secret_key,
+        'type' => $post_type,
+        'id' => $post_id,
+    ], $api_url);
+
+    // Trigger the API request
+    $response = wp_remote_get($url);
+
+    // Optional: Log errors for debugging
+    if (is_wp_error($response)) {
+        error_log('Cache invalidation failed: ' . $response->get_error_message());
+    }
+}
+add_action('save_post', 'invalidate_frontend_cache_on_save', 10, 3);
+
+
 
