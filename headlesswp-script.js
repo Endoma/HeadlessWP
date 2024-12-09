@@ -24,8 +24,11 @@ async function pageId() {
 }
 
 async function triggerNextjsApi(id) {
+    alert('triggerNextjsApi')
     try {
-        const response = await fetch('http://localhost:3000/api?secret=rrCQF66sWqLfyleeZKkBrpIcm8fp1S98LWOMYvmc5A29J23UmtsHGIfLMCHtQit5&type=post&id=' + id);
+        //const response = await fetch(`${customApiConfig.url}?secret=${customApiConfig.secret}&type=post&id=${id}`);
+
+        const response = await fetch(`${customApiConfig.url}?secret=${customApiConfig.secret}&type=post&id=${id}`);
         console.log('api')
 
         if (!response.ok) {

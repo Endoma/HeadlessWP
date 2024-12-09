@@ -36,7 +36,12 @@ function enqueue_headlesswp_script() {
         '1.0',
         true
     );
+    wp_localize_script('headlesswp-admin-script', 'customApiConfig', [
+        'url' => get_option('headlesswp_api_url'),
+        'secret' => get_option('headlesswp_api_secret'),
+    ]);
 }
+
 add_action('admin_enqueue_scripts', 'enqueue_headlesswp_script');
 
 
@@ -103,4 +108,5 @@ function headlesswp_api_secret_callback() {
     $value = get_option('headlesswp_api_secret', '');
     echo '<input type="text" id="headlesswp_api_secret" name="headlesswp_api_secret" value="' . esc_attr($value) . '" class="regular-text">';
 }
+
 
