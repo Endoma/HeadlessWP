@@ -88,23 +88,6 @@ function headlesswp_api_settings_init() {
         'general',
         'headlesswp_api_settings_section'
     );
-
-    // Register the APP Url setting
-    register_setting('general', 'headlesswp_app_url', [
-        'type' => 'string',
-        'description' => 'The URL of the App',
-        'sanitize_callback' => 'sanitize_text_field',
-        'show_in_rest' => true,
-    ]);
-
-    // Add the secret key field
-    add_settings_field(
-        'headlesswp_app_url',
-        'APP Url',
-        'headlesswp_app_url_callback',
-        'general',
-        'headlesswp_api_settings_section'
-    );
 }
 
 add_action('admin_init', 'headlesswp_api_settings_init');
@@ -124,12 +107,6 @@ function headlesswp_api_url_callback() {
 function headlesswp_api_secret_callback() {
     $value = get_option('headlesswp_api_secret', '');
     echo '<input type="text" id="headlesswp_api_secret" name="headlesswp_api_secret" value="' . esc_attr($value) . '" class="regular-text">';
-}
-
-// Secret key field callback
-function headlesswp_app_url_callback() {
-    $value = get_option('headlesswp_app_url', '');
-    echo '<input type="text" id="headlesswp_app_url" name="headlesswp_app_url" value="' . esc_attr($value) . '" class="regular-text">';
 }
 
 function invalidate_frontend_cache_on_save($post_id, $post, $update) {
