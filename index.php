@@ -1,7 +1,6 @@
 <?php
 if (!is_user_logged_in()) {
     $url = get_option('headlesswp_api_url', '');
-    //echo $value;
     header( "Location:" . $url);
 }
 else {

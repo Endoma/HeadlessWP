@@ -4,6 +4,12 @@ function add_categories_to_pages() {
 }
 add_action( 'init', 'add_categories_to_pages' );
 
+function enable_tags_for_posts() {
+    register_taxonomy_for_object_type('post_tag', 'post');
+}
+add_action('init', 'enable_tags_for_posts');
+
+
 
 function add_tags_to_pages() {
     register_taxonomy_for_object_type( 'post_tag', 'page' );
