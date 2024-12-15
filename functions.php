@@ -47,6 +47,8 @@ function headlesswp_api_settings_init() {
 
 add_action('admin_init', 'headlesswp_api_settings_init');
 
+add_theme_support('post-thumbnails');
+
 // Section description callback
 function headlesswp_api_settings_section_callback() {
     echo '<p>Enter the API URL and secret key for your application.</p>';
