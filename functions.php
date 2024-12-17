@@ -73,7 +73,7 @@ function invalidate_frontend_cache_on_save($post_id, $post, $update) {
     }
 
     // Your API endpoint and secret key
-    $api_url = get_option('headlesswp_api_url');
+    $api_url = get_option('headlesswp_api_url') . '/api';
     $secret_key = get_option('headlesswp_api_secret');
 
     // Determine the post type
